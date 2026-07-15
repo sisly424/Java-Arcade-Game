@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class CSprjSisly_RULES_UPDATED {
+public class CSprjSisly_COMPACT {
     private static Clip backgroundMusic;
 
     public static void main(String[] args) {
@@ -83,8 +83,15 @@ enum GameState {
 }
 
 class GamePanel extends JPanel {
+    /*
+     * 游戏内部仍然按照 1440 × 900 绘制，
+     * 但窗口实际显示为 1152 × 720（缩小到 80%）。
+     * 因此所有元素，包括右下角倒计时，位置都保持不变。
+     */
     private static final int WINDOW_WIDTH = 1440;
     private static final int WINDOW_HEIGHT = 900;
+    private static final int DISPLAY_WIDTH = 1152;
+    private static final int DISPLAY_HEIGHT = 720;
     private static final int GAME_WIDTH = 1120;
     private static final int ROUND_SECONDS = 90;
     private static final int PLAYER_STEP = 40;
@@ -106,7 +113,7 @@ class GamePanel extends JPanel {
     private int elapsedSeconds = 0;
 
     GamePanel() {
-        setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
+        setPreferredSize(new Dimension(DISPLAY_WIDTH, DISPLAY_HEIGHT));
         setFocusable(true);
 
         startBackground = loadImage("bp.jpg");
@@ -426,6 +433,14 @@ class GamePanel extends JPanel {
                     RenderingHints.KEY_ANTIALIASING,
                     RenderingHints.VALUE_ANTIALIAS_ON
             );
+
+            /*
+             * 将原来的 1440 × 900 画面等比例缩小到窗口中。
+             * 不需要逐个修改鱼、规则栏、分数和倒计时的位置。
+             */
+            double scaleX = getWidth() / (double) WINDOW_WIDTH;
+            double scaleY = getHeight() / (double) WINDOW_HEIGHT;
+            g.scale(scaleX, scaleY);
 
             if (state == GameState.START) {
                 drawStartScreen(g);
