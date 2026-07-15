@@ -1,4 +1,6 @@
 # Java Arcade Game
+<img width="1143" height="716" alt="Screenshot 2026-07-14 at 11 51 26 PM" src="https://github.com/user-attachments/assets/97b53cd9-1354-406c-8ed1-33e54dc55e93" />
+<img width="1145" height="709" alt="Screenshot 2026-07-14 at 11 51 53 PM" src="https://github.com/user-attachments/assets/9ee1324d-01ba-4f23-b0ac-4e14b63f5dbc" />
 
 A 2D arcade game developed in Java using Swing, featuring real-time player movement, collision detection, score tracking, animated game objects, and dynamic gameplay.
 
